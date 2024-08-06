@@ -1,0 +1,72 @@
+public class ArrayRotation {
+
+    // Method to rotate the array to the left by d positions
+    public static void rotateLeft(int[] arr, int d) {
+        if (arr == null || arr.length == 0 || d <= 0) {
+            return;
+        }
+
+        int n = arr.length;
+        d = d % n; // Handle cases where d >= n
+
+        // Reverse the first d elements
+        reverse(arr, 0, d - 1);
+        // Reverse the remaining n - d elements
+        reverse(arr, d, n - 1);
+        // Reverse the entire array
+        reverse(arr, 0, n - 1);
+    }
+
+    // Method to rotate the array to the right by d positions
+    public static void rotateRight(int[] arr, int d) {
+        if (arr == null || arr.length == 0 || d <= 0) {
+            return;
+        }
+
+        int n = arr.length;
+        d = d % n; // Handle cases where d >= n
+
+        // Reverse the last d elements
+        reverse(arr, n - d, n - 1);
+        // Reverse the first n - d elements
+        reverse(arr, 0, n - d - 1);
+        // Reverse the entire array
+        reverse(arr, 0, n - 1);
+    }
+
+    // Helper method to reverse a portion of the array
+    private static void reverse(int[] arr, int start, int end) {
+        while (start < end) {
+            int temp = arr[start];
+            arr[start] = arr[end];
+            arr[end] = temp;
+            start++;
+            end--;
+        }
+    }
+
+    // Method to print the array
+    public static void printArray(int[] arr) {
+        for (int i : arr) {
+            System.out.print(i + " ");
+        }
+        System.out.println();
+    }
+
+    public static void main(String[] args) {
+        int[] arr = {1, 2, 3, 4, 5};
+
+        System.out.println("Original array:");
+        printArray(arr);
+
+        // Rotate left by 2 positions
+        rotateLeft(arr, 2);
+        System.out.println("Array after left rotation by 2 positions:");
+        printArray(arr);
+
+        // Rotate right by 3 positions
+        rotateRight(arr, 3);
+        System.out.println("Array after right rotation by 3 positions:");
+        printArray(arr);
+    }
+}
